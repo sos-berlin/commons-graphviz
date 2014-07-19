@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -21,42 +23,42 @@
 
     <build>
 
-       <resources>
-         <resource>
-           <directory>target/generated-svg</directory>
-         </resource>
-       </resources>
+        <resources>
+            <resource>
+                <directory>target/generated-svg</directory>
+            </resource>
+        </resources>
 
-     <pluginManagement>
-        <plugins>
+        <pluginManagement>
+            <plugins>
 
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                </plugin>
         
 		        <!-- create folder generated-svg in target folder -->
-		        <plugin>
-		            <artifactId>maven-antrun-plugin</artifactId>
-		            <executions>
-		                <execution>
-		                    <id>generate-sources</id>
-		                    <phase>generate-sources</phase>
-		                    <configuration>
-		                        <tasks>
-		                            <mkdir dir="target/generated-svg" />
-		                        </tasks>
-		                    </configuration>
-		                    <goals>
-		                        <goal>run</goal>
-		                    </goals>
-		                </execution>
-		            </executions>
-		        </plugin>
-        </plugins>
-      </pluginManagement>
+                <plugin>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>generate-sources</id>
+                            <phase>generate-sources</phase>
+                            <configuration>
+                                <tasks>
+                                    <mkdir dir="target/generated-svg" />
+                                </tasks>
+                            </configuration>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
     </build>
-    
+
     <reporting>
         <plugins>
             <plugin>
@@ -65,9 +67,15 @@
             </plugin>
         </plugins>
     </reporting>
-	
-    <dependencies>
 
+    <dependencies>
+<!-- 
+        <dependency>
+            <groupId>com.sos-berlin.products</groupId>
+            <artifactId>graphviz-adapter</artifactId>
+            <scope>test</scope>
+        </dependency>
+ -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
