@@ -1,15 +1,18 @@
 package com.sos.graphviz;
 
-import com.sos.graphviz.enums.RankType;
-import com.sos.graphviz.enums.Shape;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.sos.graphviz.enums.RankType;
+import com.sos.graphviz.enums.Shape;
+import com.sos.graphviz.properties.GraphvizEnumProperty;
+import com.sos.graphviz.properties.GraphvizProperty;
 
 /**
  * The main class to create a graph. With the factory methods new... you can create subsequent elements of the graph.
@@ -27,11 +30,21 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 	private static final String constPrologSubgraph = "subgraph " + constPlaceHolder + " {";
 	private static final String constEpilog = "}";
 
-	private GraphProperties graphProperties = new GraphProperties();
+	public String getFontsize() {
+		return (String) fontsize.getValue();
+	}
+
+	public void setFontsize(final String pstrFontSize) {
+		this.fontsize.setValue(pstrFontSize);
+	}
+
+	private final GraphvizProperty fontsize = new GraphvizEnumProperty("fontsize");
+
+	private final GraphProperties graphProperties = new GraphProperties();
 	private GlobalNodeProperties globalNodeProperties = new GlobalNodeProperties(Shape.box);
-	private List<Node> nodeList = new ArrayList<Node>();
-	private List<Edge> edgeList = new ArrayList<Edge>();
-	private List<Subgraph> subgraphList = new ArrayList<Subgraph>();
+	private final List<Node> nodeList = new ArrayList<Node>();
+	private final List<Edge> edgeList = new ArrayList<Edge>();
+	private final List<Subgraph> subgraphList = new ArrayList<Subgraph>();
 
     private final static Pattern nonWordPattern = Pattern.compile("\\s|\\W");
 
@@ -45,7 +58,7 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 		init();
 	}
 
-	public GraphvizObject getProperties() {
+	@Override public GraphvizObject getProperties() {
 		return this.graphProperties;
 	}
 

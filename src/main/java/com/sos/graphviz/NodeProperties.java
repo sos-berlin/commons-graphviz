@@ -9,20 +9,29 @@ import com.sos.graphviz.properties.GraphvizProperty;
 abstract class NodeProperties extends GraphvizObject implements IGraphvizObject {
 
 	
-	private GraphvizProperty fontcolor = new GraphvizEnumProperty("fontcolor");
-	private GraphvizProperty color = new GraphvizEnumProperty("color");
-	private GraphvizProperty fillcolor = new GraphvizEnumProperty("fillcolor");
-	private GraphvizProperty fixedSize = new GraphvizProperty("fixedsize");
-	private GraphvizProperty group = new GraphvizProperty("group");
-	private GraphvizProperty height = new GraphvizProperty("height");
-	private GraphvizProperty id = new GraphvizProperty("id");
-	private GraphvizProperty label = new GraphvizHtmlProperty("label");
-	private GraphvizProperty pos = new GraphvizProperty("pos");
-	private GraphvizProperty shape = new GraphvizEnumProperty("shape");
-    private GraphvizProperty style = new GraphvizProperty("style");
-    private GraphvizProperty tooltip = new GraphvizProperty("tooltip");
-	private GraphvizProperty url = new GraphvizProperty("URL");
-	private GraphvizProperty width = new GraphvizProperty("width");
+	private final GraphvizProperty fontcolor = new GraphvizEnumProperty("fontcolor");
+	public String getFontsize() {
+		return (String) fontsize.getValue();
+	}
+
+	public void setFontsize(final String pstrFontSize) {
+		this.fontsize.setValue(pstrFontSize);
+	}
+
+	private final GraphvizProperty fontsize = new GraphvizProperty("fontsize");
+	private final GraphvizProperty color = new GraphvizEnumProperty("color");
+	private final GraphvizProperty fillcolor = new GraphvizEnumProperty("fillcolor");
+	private final GraphvizProperty fixedSize = new GraphvizProperty("fixedsize");
+	private final GraphvizProperty group = new GraphvizProperty("group");
+	private final GraphvizProperty height = new GraphvizProperty("height");
+	private final GraphvizProperty id = new GraphvizProperty("id");
+	private final GraphvizProperty label = new GraphvizHtmlProperty("label");
+	private final GraphvizProperty pos = new GraphvizProperty("pos");
+	private final GraphvizProperty shape = new GraphvizEnumProperty("shape");
+    private final GraphvizProperty style = new GraphvizProperty("style");
+    private final GraphvizProperty tooltip = new GraphvizProperty("tooltip");
+	private final GraphvizProperty url = new GraphvizProperty("URL");
+	private final GraphvizProperty width = new GraphvizProperty("width");
 	
 	private static final String constProlog = " [";
 	private static final String constEpilog = "]";
@@ -36,12 +45,13 @@ abstract class NodeProperties extends GraphvizObject implements IGraphvizObject 
 		super( (prefix + " ").trim() + constProlog, constEpilog);
 	}
 	
-	public String getContent() {
+	@Override public String getContent() {
 		StringBuilder sb = new StringBuilder();
 		sb.append( color.getContent() );
 		sb.append( fixedSize.getContent() );
 		sb.append( fillcolor.getContent() );
 		sb.append( fontcolor.getContent() );
+		sb.append( fontsize.getContent() );
 		sb.append( group.getContent() );
 		sb.append( height.getContent() );
 		sb.append( id.getContent() );
@@ -55,7 +65,7 @@ abstract class NodeProperties extends GraphvizObject implements IGraphvizObject 
 		return sb.toString();
 	}
 
-	public GraphvizObject getProperties() {
+	@Override public GraphvizObject getProperties() {
 		return this;
 	}
 

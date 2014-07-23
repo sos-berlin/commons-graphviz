@@ -1,14 +1,19 @@
 package com.sos.graphviz;
 
-import com.google.common.io.Files;
-import com.google.common.io.Resources;
-import com.sos.graphviz.enums.*;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.google.common.io.Files;
+import com.google.common.io.Resources;
+import com.sos.graphviz.enums.FileType;
+import com.sos.graphviz.enums.RankDir;
+import com.sos.graphviz.enums.SVGColor;
+import com.sos.graphviz.enums.Shape;
+import com.sos.graphviz.enums.Style;
 
 /**
  * Class to demonstrate the usage of class Graph and its subsequent objects (subgraphs, nodes, edges).
@@ -94,6 +99,7 @@ public class GraphTest {
         File tempDir = Files.createTempDir();
         GraphIO io = new GraphIO(g);
         io.setDotDir(tempDir.getAbsolutePath());
+        System.out.println(targetDir);
 		io.writeGraphToFile(FileType.svg, new File(targetDir,"test.svg").getAbsolutePath() );
 	}
 	

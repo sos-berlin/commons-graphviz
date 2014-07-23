@@ -20,7 +20,7 @@ public class GraphIO {
 	public static final String	name		= System.getProperty("os.name");
 	public static final boolean	isWindows	= name.startsWith("Windows");
 	private static String		DOT			= isWindows ? "dot.exe" : "dot";
-	private String				tempDir		= System.getProperty("java.io.tmpdir");
+	private String				tempDir		= System.getProperty("java.io.tmpdir") + "/graphviz/";
 	private String				dotDir		= null;
 	private final Graph			graph;
 
@@ -186,7 +186,7 @@ public class GraphIO {
 	 *         graph.
 	 */
 	private File writeDotSourceToTemporaryFile(String content) throws java.io.IOException {
-		File temp = File.createTempFile("graph_", ".dot.tmp", new File(getTempDir()));
+		File temp = File.createTempFile("graphviz_", ".dot.tmp", new File(getTempDir()));
 		try {
 			FileWriter fout = new FileWriter(temp);
 			fout.write(content);
