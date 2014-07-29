@@ -8,7 +8,8 @@ public enum FileType {
     ps,
     svg,
     png,
-    plain;
+    plain,
+    cmapx;
     
     public static FileType fromText(String fileType) throws Exception {
     	String searchFor = fileType.toLowerCase();
