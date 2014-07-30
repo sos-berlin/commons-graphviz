@@ -57,7 +57,8 @@ public class GraphIO {
 	 * @param  to A File object to where we want to write.
 	 */
 	public void writeGraphToFile(FileType type, File to) throws IOException {
-		logger.debug("Write output to file " + to.getAbsolutePath() + ".");
+		logger.debug("Write graph to file " + to.getAbsolutePath() + ".");
+		
 		FileOutputStream fos = new FileOutputStream(to);
 		File dot = writeDotSourceToTemporaryFile(graph.getSource());
 		fos.write(getGraph(dot, type));
@@ -69,8 +70,9 @@ public class GraphIO {
 			logger.debug("try to move {} to {}.", dot.getAbsolutePath(), targetFile.getAbsolutePath());
 			Files.move(dot, targetFile);
 		}
-		else
+		else {
 			deleteDotFile(dot);
+		}
 	}
 
 	private static String replaceLast(String string, String toReplace, String replacement) {

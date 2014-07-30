@@ -49,12 +49,12 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
     private final static Pattern nonWordPattern = Pattern.compile("\\s|\\W");
 
     public Graph() {
-		super("G",constProlog.replace(constPlaceHolder,constGraph), constEpilog);
+		super(constGraph,constProlog.replace(constPlaceHolder,constGraph), constEpilog);
         init();
 	}
 
-	protected Graph(String subgraphId) {
-		super(subgraphId,constPrologSubgraph.replace(constPlaceHolder,subgraphId), constEpilog);
+	public Graph(String GraphId) {
+		super(GraphId,constProlog.replace(constPlaceHolder,GraphId), constEpilog);
 		init();
 	}
 

@@ -9,7 +9,9 @@ public enum FileType {
     svg,
     png,
     plain,
-    cmapx;
+//    plain_ext "plain-ext",
+    cmapx,
+    cmap;
     
     public static FileType fromText(String fileType) throws Exception {
     	String searchFor = fileType.toLowerCase();
