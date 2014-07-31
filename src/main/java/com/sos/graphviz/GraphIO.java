@@ -39,12 +39,12 @@ public class GraphIO {
 		return DOT;
 	}
 
-/**
-	 * Writes the graph's image in a file.
+	/**
+		 * Writes the graph's image in a file.
 
-	 * @param  type The type of file.
-	 * @param  file A Filename to where we want to write.
-	 */
+		 * @param  type The type of file.
+		 * @param  file A Filename to where we want to write.
+		 */
 	public void writeGraphToFile(FileType type, String file) throws IOException {
 		File to = new File(file);
 		writeGraphToFile(type, to);
@@ -58,7 +58,6 @@ public class GraphIO {
 	 */
 	public void writeGraphToFile(FileType type, File to) throws IOException {
 		logger.debug("Write graph to file " + to.getAbsolutePath() + ".");
-		
 		FileOutputStream fos = new FileOutputStream(to);
 		File dot = writeDotSourceToTemporaryFile(graph.getSource());
 		fos.write(getGraph(dot, type));
@@ -127,18 +126,19 @@ public class GraphIO {
 		byte[] img_stream = null;
 		try {
 			img = File.createTempFile("graph_", "." + type, new File(getTempDir()));
+			img.deleteOnExit();
 			Runtime rt = Runtime.getRuntime();
 			// patch by Mike Chenault
 			String[] args = { DOT, "-T" + type, dot.getAbsolutePath(), "-o", img.getAbsolutePath() };
-			Process p = rt.exec(args);
 			String cmd = getCommandString(args);
-			logger.info("Calling: " + cmd);
+			logger.debug("About to execute: " + cmd);
+			Process p = rt.exec(args);
 			InputStream stderrIs = p.getErrorStream();
 			InputStreamReader stderrReader = new InputStreamReader(stderrIs);
 			BufferedReader stderr = new BufferedReader(stderrReader);
 			String line = null;
 			while ((line = stderr.readLine()) != null) {
-				if (line.startsWith("Warning:")) {
+				if (line.startsWith("Warning:")) {   // I18N ?
 					logger.warn(line);
 				}
 				else {
@@ -146,24 +146,23 @@ public class GraphIO {
 				}
 			}
 			int exitVal = p.waitFor();
-			logger.info("Process ends with cc=" + exitVal);
-			if (exitVal != 0)
+			if (exitVal != 0) {
+				logger.error(String.format("Process '%1$s' ends with cc=%2$s",cmd, exitVal));
 				throw new RuntimeException(cmd + " ends with cc=" + exitVal);
+			}
 			FileInputStream in = new FileInputStream(img.getAbsolutePath());
 			img_stream = new byte[in.available()];
 			in.read(img_stream);
 			// Close it if we need to
 			if (in != null)
 				in.close();
-			if (img.delete() == false)
-				System.err.println("Warning: " + img.getAbsolutePath() + " could not be deleted!");
 		}
-		catch (java.io.IOException ioe) {
+		catch (IOException ioe) {
 			System.err.println("Error:    in I/O processing of tempfile in dir " + getTempDir() + "\n");
 			System.err.println("       or in calling external command");
 			ioe.printStackTrace();
 		}
-		catch (java.lang.InterruptedException ie) {
+		catch (InterruptedException ie) {
 			System.err.println("Error: the execution of the external program was interrupted");
 			ie.printStackTrace();
 		}
