@@ -69,13 +69,6 @@
     </reporting>
 
     <dependencies>
-<!-- 
-        <dependency>
-            <groupId>com.sos-berlin.products</groupId>
-            <artifactId>graphviz-adapter</artifactId>
-            <scope>test</scope>
-        </dependency>
- -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
