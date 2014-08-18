@@ -57,7 +57,7 @@ public class GraphIO {
 	 * @param  to A File object to where we want to write.
 	 */
 	public void writeGraphToFile(FileType type, File to) throws IOException {
-		logger.debug("Write graph to file " + to.getAbsolutePath() + ".");
+		logger.trace("Write graph to file " + to.getAbsolutePath() + ".");
 		FileOutputStream fos = new FileOutputStream(to);
 		File dot = writeDotSourceToTemporaryFile(graph.getSource());
 		fos.write(getGraph(dot, type));
@@ -66,7 +66,7 @@ public class GraphIO {
 			// String targetName = replaceLast(to.getName(),Files.getFileExtension(to.getName()),"dot"); // getFileExtension nicht in Guava 10,0
 			String targetName = replaceLast(to.getName(), getFileExtension(to.getName()), "dot");
 			File targetFile = new File(getDotDir(), targetName);
-			logger.debug("try to move {} to {}.", dot.getAbsolutePath(), targetFile.getAbsolutePath());
+			logger.trace("try to move {} to {}.", dot.getAbsolutePath(), targetFile.getAbsolutePath());
 			Files.move(dot, targetFile);
 		}
 		else {
@@ -131,7 +131,7 @@ public class GraphIO {
 			// patch by Mike Chenault
 			String[] args = { DOT, "-T" + type, dot.getAbsolutePath(), "-o", img.getAbsolutePath() };
 			String cmd = getCommandString(args);
-			logger.debug("About to execute: " + cmd);
+			logger.trace	("About to execute: " + cmd);
 			Process p = rt.exec(args);
 			InputStream stderrIs = p.getErrorStream();
 			InputStreamReader stderrReader = new InputStreamReader(stderrIs);
