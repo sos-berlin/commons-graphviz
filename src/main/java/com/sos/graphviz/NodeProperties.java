@@ -6,7 +6,7 @@ import com.sos.graphviz.properties.GraphvizEnumProperty;
 import com.sos.graphviz.properties.GraphvizHtmlProperty;
 import com.sos.graphviz.properties.GraphvizProperty;
 
-abstract class NodeProperties extends GraphvizObject implements IGraphvizObject {
+public abstract class NodeProperties extends GraphvizObject implements IGraphvizObject {
 
 	
 	private final GraphvizProperty fontcolor = new GraphvizEnumProperty("fontcolor");
@@ -69,8 +69,9 @@ abstract class NodeProperties extends GraphvizObject implements IGraphvizObject 
 		return this;
 	}
 
-	public void setShape(Shape shape) {
+	public NodeProperties setShape(Shape shape) {
 		this.shape.setValue(shape);
+		return this;
 	}
 
 	public void setWidth(double width) {

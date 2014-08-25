@@ -3,6 +3,7 @@ import com.sos.graphviz.enums.ArrowType;
 import com.sos.graphviz.enums.DirType;
 import com.sos.graphviz.enums.PortPos;
 import com.sos.graphviz.enums.SVGColor;
+import com.sos.graphviz.enums.Style;
 import com.sos.graphviz.properties.GraphvizEnumProperty;
 import com.sos.graphviz.properties.GraphvizProperty;
 
@@ -49,6 +50,7 @@ public class EdgeProperties extends GraphvizObject implements IGraphvizObject {
 	private final GraphvizProperty	tailPort	= new GraphvizProperty("tailport");
 	private final GraphvizProperty	url			= new GraphvizProperty("URL");
 	private final GraphvizProperty	weight		= new GraphvizProperty("weight");
+	private final GraphvizProperty	style		= new GraphvizProperty("style");
 
 	public EdgeProperties() {
 		super(constProlog, constEpilog);
@@ -81,6 +83,7 @@ public class EdgeProperties extends GraphvizObject implements IGraphvizObject {
 		sb.append(tailPort.getContent());
 		sb.append(url.getContent());
 		sb.append(weight.getContent());
+		sb.append(style.getContent());
 		return sb.toString();
 	}
 
@@ -88,6 +91,14 @@ public class EdgeProperties extends GraphvizObject implements IGraphvizObject {
 		return this;
 	}
 
+	public Style getStyle() {
+		return (Style) style.getValue();
+	}
+	public EdgeProperties setStyle(final Style penuStyle) {
+		this.style.setValue(penuStyle);
+		return this;
+	}
+	
 	public ArrowType getArrowHead() {
 		return (ArrowType) arrowHead.getValue();
 	}
