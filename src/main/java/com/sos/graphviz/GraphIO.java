@@ -187,7 +187,11 @@ public class GraphIO {
 	 *         graph.
 	 */
 	private File writeDotSourceToTemporaryFile(String content) throws java.io.IOException {
-		File temp = File.createTempFile("graphviz_", ".dot.tmp", new File(getTempDir()));
+		File objF = new File(getTempDir());
+		if (objF.exists() == false) {
+			objF.mkdirs();
+		}
+		File temp = File.createTempFile("graphviz_", ".dot.tmp", objF);
 		try {
 			FileWriter fout = new FileWriter(temp);
 			fout.write(content);
