@@ -1,78 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
->
-    <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.sos-berlin</groupId>
-        <artifactId>products</artifactId>
-        <version>1.8-SNAPSHOT</version>
-    </parent>
-    
-    <artifactId>graphviz-adapter</artifactId>
-    <packaging>jar</packaging>
-    <name>${project.artifactId}</name>
-    <inceptionYear>2013</inceptionYear>
+	<parent>
+		<groupId>com.sos-berlin</groupId>
+		<artifactId>products</artifactId>
+		<version>1.8-SNAPSHOT</version>
+	</parent>
 
-		<!-- Bewirkt die Kopie in lib_release_unversioned_jar und lib_release_jar -->
-    <properties>
-        <setup.do.not.deploy>false</setup.do.not.deploy>
-        <setup.target.name>com.sos.tools.graphviz-adapter</setup.target.name>
-    </properties>
+	<artifactId>graphviz-adapter</artifactId>
+	<packaging>jar</packaging>
+	<name>${project.artifactId}</name>
+	<inceptionYear>2013</inceptionYear>
 
-    <build>
+	<!-- Bewirkt die Kopie in lib_release_unversioned_jar und lib_release_jar -->
+	<properties>
+		<setup.do.not.deploy>false</setup.do.not.deploy>
+		<setup.target.name>com.sos.tools.graphviz-adapter</setup.target.name>
+	</properties>
 
-        <resources>
-            <resource>
-                <directory>target/generated-svg</directory>
-            </resource>
-        </resources>
+	<build>
 
-        <pluginManagement>
-            <plugins>
+		<resources>
+			<resource>
+				<directory>target/generated-svg</directory>
+			</resource>
+		</resources>
 
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                </plugin>
-        
-		        <!-- create folder generated-svg in target folder -->
-                <plugin>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>generate-sources</id>
-                            <phase>generate-sources</phase>
-                            <configuration>
-                                <tasks>
-                                    <mkdir dir="target/generated-svg" />
-                                </tasks>
-                            </configuration>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+		<pluginManagement>
+			<plugins>
 
-    </build>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+				</plugin>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>com.soebes.maven.plugins.dmg</groupId>
-                <artifactId>doxygen-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </reporting>
+				<!-- create folder generated-svg in target folder -->
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>generate-sources</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<tasks>
+									<mkdir dir="target/generated-svg" />
+								</tasks>
+							</configuration>
+							<goals>
+								<goal>run</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>com.soebes.maven.plugins.dmg</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.sos-berlin.jobscheduler</groupId>
@@ -80,39 +79,39 @@
 			<version>${project.version}</version>
 		</dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
 
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+		</dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
 
-    </dependencies>
+	</dependencies>
 
 </project>
