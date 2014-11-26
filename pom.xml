@@ -41,7 +41,7 @@
 					<executions>
 						<execution>
 							<id>generate-sources</id>
-							<phase>generate-sources</phase>
+							<phase>process-sources</phase>
 							<configuration>
 								<tasks>
 									<mkdir dir="target/generated-svg" />
