@@ -14,12 +14,6 @@
 	<name>${project.artifactId}</name>
 	<inceptionYear>2013</inceptionYear>
 
-	<!-- Bewirkt die Kopie in lib_release_unversioned_jar und lib_release_jar -->
-	<properties>
-		<setup.do.not.deploy>false</setup.do.not.deploy>
-		<setup.target.name>com.sos.tools.graphviz-adapter</setup.target.name>
-	</properties>
-
 	<build>
 
 		<resources>
@@ -57,15 +51,6 @@
 		</pluginManagement>
 
 	</build>
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>com.soebes.maven.plugins.dmg</groupId>
-				<artifactId>doxygen-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</reporting>
 
 	<dependencies>
 		<dependency>
