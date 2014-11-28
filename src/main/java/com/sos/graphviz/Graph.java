@@ -1,4 +1,13 @@
 package com.sos.graphviz;
+import com.sos.JSHelper.Exceptions.JobSchedulerException;
+import com.sos.graphviz.enums.FileType;
+import com.sos.graphviz.enums.RankType;
+import com.sos.graphviz.enums.Shape;
+import com.sos.graphviz.properties.GraphvizEnumProperty;
+import com.sos.graphviz.properties.GraphvizProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,16 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.sos.JSHelper.Exceptions.JobSchedulerException;
-import com.sos.graphviz.enums.FileType;
-import com.sos.graphviz.enums.RankType;
-import com.sos.graphviz.enums.Shape;
-import com.sos.graphviz.properties.GraphvizEnumProperty;
-import com.sos.graphviz.properties.GraphvizProperty;
 
 /**
  * The main class to create a graph. With the factory methods new... you can create subsequent elements of the graph.
@@ -51,8 +50,8 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 		init();
 	}
 
-	public Graph(String GraphId) {
-		super(GraphId, constProlog.replace(constPlaceHolder, GraphId), constEpilog);
+	protected Graph(String subGraphId) {
+		super(subGraphId, constPrologSubgraph.replace(constPlaceHolder, subGraphId), constEpilog);
 		init();
 	}
 
