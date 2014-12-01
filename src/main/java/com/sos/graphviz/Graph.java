@@ -1,6 +1,4 @@
 package com.sos.graphviz;
-import com.sos.JSHelper.Exceptions.JobSchedulerException;
-import com.sos.graphviz.enums.FileType;
 import com.sos.graphviz.enums.RankType;
 import com.sos.graphviz.enums.Shape;
 import com.sos.graphviz.properties.GraphvizEnumProperty;
@@ -8,8 +6,6 @@ import com.sos.graphviz.properties.GraphvizProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -63,24 +59,6 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 		edgeList.clear();
 		nodeList.clear();
 		subgraphList.clear();
-	}
-
-	public void writeDOTFile(FileType type, File pobjTargetFile) {
-		File tempDir = new File("c:/temp/" + "graphviz");
-		GraphIO io = new GraphIO(this);
-		//		io.setDotExecFileName("\"C:\\Program Files (x86)\\Graphviz2.34\\bin\\dot.exe\"");
-		io.setDotDir(tempDir.getAbsolutePath());
-		File objFolder = pobjTargetFile.getParentFile();
-		if (objFolder.exists() == false) {
-			objFolder.mkdir();
-		}
-//		String strTargetDir = objFolder.getAbsolutePath();
-		try {
-			io.writeGraphToFile(type, pobjTargetFile);
-		}
-		catch (IOException e) {
-			throw new JobSchedulerException(e);
-		}
 	}
 
 	public GlobalNodeProperties getGlobalNodeProperties() {
