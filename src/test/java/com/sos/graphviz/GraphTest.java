@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.io.Files;
@@ -18,6 +19,7 @@ import com.sos.graphviz.enums.Style;
 /**
  * Class to demonstrate the usage of class Graph and its subsequent objects (subgraphs, nodes, edges).
  */
+@Ignore("Test set to Ignore for later examination")
 public class GraphTest {
 
     private final static String targetDirName = Resources.getResource("").getPath() + "/generated-svg/";
