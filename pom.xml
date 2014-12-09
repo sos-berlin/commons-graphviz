@@ -14,6 +14,12 @@
 	<name>${project.artifactId}</name>
 	<inceptionYear>2013</inceptionYear>
 
+    <scm>
+        <connection>scm:git:git@github.com:sos-berlin/commons-graphviz.git</connection>
+        <developerConnection>scm:git:git@github.com:sos-berlin/commons-graphviz.git</developerConnection>
+        <url>https://github.com/sos-berlin/commons-graphviz</url>
+    </scm>
+
 	<build>
 
 		<resources>
