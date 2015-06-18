@@ -154,6 +154,7 @@ public enum SVGColor {
     yellow("#ffff00"),
     yellowgreen("#9acd32");
 
+
     private final String rgbString;
     private final RGBColor rgbColor;
 

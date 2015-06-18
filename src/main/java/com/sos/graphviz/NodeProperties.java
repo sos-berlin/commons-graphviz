@@ -18,7 +18,8 @@ public abstract class NodeProperties extends GraphvizObject implements IGraphviz
 		this.fontsize.setValue(pstrFontSize);
 	}
 
-	private final GraphvizProperty fontsize = new GraphvizProperty("fontsize");
+    private final GraphvizProperty fontname = new GraphvizProperty("fontname");
+    private final GraphvizProperty fontsize = new GraphvizProperty("fontsize");
 	private final GraphvizProperty color = new GraphvizEnumProperty("color");
 	private final GraphvizProperty fillcolor = new GraphvizEnumProperty("fillcolor");
 	private final GraphvizProperty fixedSize = new GraphvizProperty("fixedsize");
@@ -50,7 +51,8 @@ public abstract class NodeProperties extends GraphvizObject implements IGraphviz
 		sb.append( color.getContent() );
 		sb.append( fixedSize.getContent() );
 		sb.append( fillcolor.getContent() );
-		sb.append( fontcolor.getContent() );
+        sb.append( fontname.getContent() );
+        sb.append( fontcolor.getContent() );
 		sb.append( fontsize.getContent() );
 		sb.append( group.getContent() );
 		sb.append( height.getContent() );
@@ -65,13 +67,22 @@ public abstract class NodeProperties extends GraphvizObject implements IGraphviz
 		return sb.toString();
 	}
 
-	@Override public GraphvizObject getProperties() {
+
+    @Override public GraphvizObject getProperties() {
 		return this;
 	}
 
 	public NodeProperties setShape(Shape shape) {
 		this.shape.setValue(shape);
 		return this;
+	}
+	
+	public String getFontname() {
+	    return (String)fontname.getValue();
+	}
+	    
+	public void setFontname(String fontname) {
+	     this.fontname.setValue(fontname);
 	}
 
 	public void setWidth(double width) {

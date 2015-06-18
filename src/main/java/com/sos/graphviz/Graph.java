@@ -3,6 +3,7 @@ import com.sos.graphviz.enums.RankType;
 import com.sos.graphviz.enums.Shape;
 import com.sos.graphviz.properties.GraphvizEnumProperty;
 import com.sos.graphviz.properties.GraphvizProperty;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,6 +62,10 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 		subgraphList.clear();
 	}
 
+	protected String getQuoted(final String pstrVal) {
+        return "\"" + pstrVal.trim() + "\"";
+    }
+	
 	public GlobalNodeProperties getGlobalNodeProperties() {
 		return this.globalNodeProperties;
 	}
@@ -70,7 +75,9 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 	}
 
 	public Node getNodeOrNull(String id) {
-		// logger.debug("Search for node with id {}",id);
+		id = getQuoted(id);
+	    // logger.debug("Search for node with id {}",id);
+	    
 		if (nodeList.isEmpty())
 			logger.debug("The graph {} contains no nodes.", this.getId());
 		Node result = null;
@@ -131,6 +138,7 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 	}
 
 	public Node newNode(String node) {
+	    node = getQuoted(node);
 		Node n = new Node(node);
 		nodeList.add(n);
 		return n;
@@ -141,6 +149,21 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 		edgeList.add(e);
 		return e;
 	}
+
+    public Edge newEdge(String from, String to) {
+ 
+        Node nodeFrom=getNodeOrNull(from);
+        Node nodeTo=getNodeOrNull(to);
+        if (nodeFrom == null){
+            nodeFrom = newNode(from);
+         }
+        if (nodeTo == null){
+            nodeTo = newNode(to);
+         }
+        Edge e = new Edge(nodeFrom, nodeTo);
+        edgeList.add(e);
+        return e;
+    }
 
 	public Subgraph newSubgraph(String subgraphId, RankType rankType) {
 		Subgraph s = new Subgraph(subgraphId, rankType, this);
