@@ -129,7 +129,7 @@ public class GraphIO {
 			img.deleteOnExit();
 			Runtime rt = Runtime.getRuntime();
 			// patch by Mike Chenault
-			String[] args = { DOT, "-T" + type, dot.getAbsolutePath(), "-o", img.getAbsolutePath() };
+			String[] args = { DOT,  "-T" + type, dot.getAbsolutePath(), "-o", img.getAbsolutePath(), "-Gcharset=latin1" };
 			String cmd = getCommandString(args);
 			logger.trace	("About to execute: " + cmd);
 			Process p = rt.exec(args);
