@@ -61,7 +61,9 @@ public class GraphIO {
 		FileOutputStream fos = new FileOutputStream(to);
 		File dot = writeDotSourceToTemporaryFile(graph.getSource());
 		fos.write(getGraph(dot, type));
+		fos.flush();
 		fos.close();
+
 		if (getDotDir() != null) {
 			// String targetName = replaceLast(to.getName(),Files.getFileExtension(to.getName()),"dot"); // getFileExtension nicht in Guava 10,0
 			String targetName = replaceLast(to.getName(), getFileExtension(to.getName()), "dot");
