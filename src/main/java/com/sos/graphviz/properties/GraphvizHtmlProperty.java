@@ -8,7 +8,7 @@ public class GraphvizHtmlProperty extends GraphvizProperty implements IGraphvizP
 	
 	@Override
 	public String getContent() {
-		return (isSet()) ? getPropertyName() + " = <" + getValue() + ">" + nl : "";
+		return (isSet()) ? getPropertyName() + " = <" + getValue() + ">" + NL : "";
 	}
 	
 }

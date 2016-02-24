@@ -9,16 +9,17 @@ public enum FileType {
     svg,
     png,
     plain,
-//    plain_ext "plain-ext",
     cmapx,
     cmap;
-    
+
     public static FileType fromText(String fileType) throws Exception {
-    	String searchFor = fileType.toLowerCase();
-    	for(FileType f : FileType.values()) {
-    		if (searchFor.equals(f.name())) return f;
-    	}
-    	throw new Exception("Filetype " + fileType + " is unknown for DOT.");
+        String searchFor = fileType.toLowerCase();
+        for (FileType f : FileType.values()) {
+            if (searchFor.equals(f.name())) {
+                return f;
+            }
+        }
+        throw new Exception("Filetype " + fileType + " is unknown for DOT.");
     }
 
     public String getExtension() {
