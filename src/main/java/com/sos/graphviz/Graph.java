@@ -1,4 +1,5 @@
 package com.sos.graphviz;
+
 import com.sos.graphviz.enums.RankType;
 import com.sos.graphviz.enums.Shape;
 import com.sos.graphviz.properties.GraphvizEnumProperty;
@@ -13,180 +14,180 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * The main class to create a graph. With the factory methods new... you can create subsequent elements of the graph.
- * If you want to save the graph as file you can use the class com.sos.graphviz.GraphIO.
+/** The main class to create a graph. With the factory methods new... you can
+ * create subsequent elements of the graph. If you want to save the graph as
+ * file you can use the class com.sos.graphviz.GraphIO.
  *
- * See class com.sos.graphviz.GraphTest how to create a graph.
- */
+ * See class com.sos.graphviz.GraphTest how to create a graph. */
 public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
-	private final static Logger	logger				= LoggerFactory.getLogger(Graph.class);
-	private static final String	constGraph			= "G";
-	private static final String	constPlaceHolder	= "%id%";
-	private static final String	constProlog			= "digraph " + constPlaceHolder + " {";
-	private static final String	constPrologSubgraph	= "subgraph " + constPlaceHolder + " {";
-	private static final String	constEpilog			= "}";
 
-	public String getFontsize() {
-		return (String) fontsize.getValue();
-	}
+    private final static Logger LOGGER = LoggerFactory.getLogger(Graph.class);
+    private static final String CONST_GRAPH = "G";
+    private static final String CONST_PLACEHOLDER = "%id%";
+    private static final String CONST_PROLOG = "digraph " + CONST_PLACEHOLDER + " {";
+    private static final String CONST_PROLOG_SUBGRAPH = "subgraph " + CONST_PLACEHOLDER + " {";
+    private static final String CONST_EPILOG = "}";
+    private final static Pattern NON_WORD_PATTERN = Pattern.compile("\\s|\\W");
+    private final GraphvizProperty fontsize = new GraphvizEnumProperty("fontsize");
+    private final GraphProperties graphProperties = new GraphProperties();
+    private GlobalNodeProperties globalNodeProperties = new GlobalNodeProperties(Shape.box);
+    private final List<Node> nodeList = new ArrayList<Node>();
+    private final List<Edge> edgeList = new ArrayList<Edge>();
+    private final List<Subgraph> subgraphList = new ArrayList<Subgraph>();
 
-	public void setFontsize(final String pstrFontSize) {
-		this.fontsize.setValue(pstrFontSize);
-	}
-	private final GraphvizProperty	fontsize				= new GraphvizEnumProperty("fontsize");
-	private final GraphProperties	graphProperties			= new GraphProperties();
-	private GlobalNodeProperties	globalNodeProperties	= new GlobalNodeProperties(Shape.box);
-	private final List<Node>		nodeList				= new ArrayList<Node>();
-	private final List<Edge>		edgeList				= new ArrayList<Edge>();
-	private final List<Subgraph>	subgraphList			= new ArrayList<Subgraph>();
-	private final static Pattern	nonWordPattern			= Pattern.compile("\\s|\\W");
+    public String getFontsize() {
+        return (String) fontsize.getValue();
+    }
 
-	public Graph() {
-		super(constGraph, constProlog.replace(constPlaceHolder, constGraph), constEpilog);
-		init();
-	}
+    public void setFontsize(final String pstrFontSize) {
+        this.fontsize.setValue(pstrFontSize);
+    }
 
-	protected Graph(String subGraphId) {
-		super(subGraphId, constPrologSubgraph.replace(constPlaceHolder, subGraphId), constEpilog);
-		init();
-	}
+    public Graph() {
+        super(CONST_GRAPH, CONST_PROLOG.replace(CONST_PLACEHOLDER, CONST_GRAPH), CONST_EPILOG);
+        init();
+    }
 
-	@Override public GraphvizObject getProperties() {
-		return this.graphProperties;
-	}
+    protected Graph(String subGraphId) {
+        super(subGraphId, CONST_PROLOG_SUBGRAPH.replace(CONST_PLACEHOLDER, subGraphId), CONST_EPILOG);
+        init();
+    }
 
-	public void init() {
-		edgeList.clear();
-		nodeList.clear();
-		subgraphList.clear();
-	}
+    @Override
+    public GraphvizObject getProperties() {
+        return this.graphProperties;
+    }
 
-	protected String getQuoted(final String pstrVal) {
+    public void init() {
+        edgeList.clear();
+        nodeList.clear();
+        subgraphList.clear();
+    }
+
+    protected String getQuoted(final String pstrVal) {
         return "\"" + pstrVal.trim() + "\"";
     }
-	
-	public GlobalNodeProperties getGlobalNodeProperties() {
-		return this.globalNodeProperties;
-	}
 
-	protected void setGlobalNodeProperties(GlobalNodeProperties globalNodeProperties) {
-		this.globalNodeProperties = globalNodeProperties;
-	}
+    public GlobalNodeProperties getGlobalNodeProperties() {
+        return this.globalNodeProperties;
+    }
 
-	public Node getNodeOrNull(String id) {
-		id = getQuoted(id);
-	    // logger.debug("Search for node with id {}",id);
-	    
-		if (nodeList.isEmpty())
-			logger.debug("The graph {} contains no nodes.", this.getId());
-		Node result = null;
-		for (Node n : nodeList) {
-			// logger.debug("Found node with id {} in graph.",n.getId());
-			if (n.getId().equals(id)) {
-				result = n;
-				break;
-			}
-		}
-		return result;
-	}
+    protected void setGlobalNodeProperties(GlobalNodeProperties globalNodeProperties) {
+        this.globalNodeProperties = globalNodeProperties;
+    }
 
-	public Node getNodeOrNullInAllGraphs(String id) {
-		Node result = getNodeOrNull(id);
-		if (result == null) {
-			for (Subgraph s : subgraphList) {
-				result = s.getNodeOrNullInAllGraphs(id);
-				if (result != null)
-					break;
-			}
-		}
-		return result;
-	}
+    public Node getNodeOrNull(String id) {
+        id = getQuoted(id);
+        if (nodeList.isEmpty()) {
+            LOGGER.debug("The graph {} contains no nodes.", this.getId());
+        }
+        Node result = null;
+        for (Node n : nodeList) {
+            if (n.getId().equals(id)) {
+                result = n;
+                break;
+            }
+        }
+        return result;
+    }
 
-	@Override public String getContent() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(getProlog());
-		sb.append(getMainContent());
-		return sb.toString();
-	}
+    public Node getNodeOrNullInAllGraphs(String id) {
+        Node result = getNodeOrNull(id);
+        if (result == null) {
+            for (Subgraph s : subgraphList) {
+                result = s.getNodeOrNullInAllGraphs(id);
+                if (result != null) {
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 
-	protected String getProlog() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(graphProperties.getSource());
-		sb.append(globalNodeProperties.getSource());
-		return sb.toString();
-	}
+    @Override
+    public String getContent() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getProlog());
+        sb.append(getMainContent());
+        return sb.toString();
+    }
 
-	protected String getMainContent() {
-		StringBuilder sb = new StringBuilder();
-		Iterator<Node> nit = nodeList.iterator();
-		Iterator<Subgraph> sit = subgraphList.iterator();
-		while (sit.hasNext()) {
-			Subgraph s = sit.next();
-			sb.append(s.getSource());
-		}
-		while (nit.hasNext()) {
-			Node n = nit.next();
-			sb.append(n.getSource());
-		}
-		Iterator<Edge> eit = edgeList.iterator();
-		while (eit.hasNext()) {
-			Edge e = eit.next();
-			sb.append(e.getSource());
-		}
-		return sb.toString();
-	}
+    protected String getProlog() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(graphProperties.getSource());
+        sb.append(globalNodeProperties.getSource());
+        return sb.toString();
+    }
 
-	public Node newNode(String node) {
-	    node = getQuoted(node);
-		Node n = new Node(node);
-		nodeList.add(n);
-		return n;
-	}
+    protected String getMainContent() {
+        StringBuilder sb = new StringBuilder();
+        Iterator<Node> nit = nodeList.iterator();
+        Iterator<Subgraph> sit = subgraphList.iterator();
+        while (sit.hasNext()) {
+            Subgraph s = sit.next();
+            sb.append(s.getSource());
+        }
+        while (nit.hasNext()) {
+            Node n = nit.next();
+            sb.append(n.getSource());
+        }
+        Iterator<Edge> eit = edgeList.iterator();
+        while (eit.hasNext()) {
+            Edge e = eit.next();
+            sb.append(e.getSource());
+        }
+        return sb.toString();
+    }
 
-	public Edge newEdge(Node nodeFrom, Node nodeTo) {
-		Edge e = new Edge(nodeFrom, nodeTo);
-		edgeList.add(e);
-		return e;
-	}
+    public Node newNode(String node) {
+        node = getQuoted(node);
+        Node n = new Node(node);
+        nodeList.add(n);
+        return n;
+    }
 
-    public Edge newEdge(String from, String to) {
- 
-        Node nodeFrom=getNodeOrNull(from);
-        Node nodeTo=getNodeOrNull(to);
-        if (nodeFrom == null){
-            nodeFrom = newNode(from);
-         }
-        if (nodeTo == null){
-            nodeTo = newNode(to);
-         }
+    public Edge newEdge(Node nodeFrom, Node nodeTo) {
         Edge e = new Edge(nodeFrom, nodeTo);
         edgeList.add(e);
         return e;
     }
 
-	public Subgraph newSubgraph(String subgraphId, RankType rankType) {
-		Subgraph s = new Subgraph(subgraphId, rankType, this);
-		subgraphList.add(s);
-		return s;
-	}
+    public Edge newEdge(String from, String to) {
+        Node nodeFrom = getNodeOrNull(from);
+        Node nodeTo = getNodeOrNull(to);
+        if (nodeFrom == null) {
+            nodeFrom = newNode(from);
+        }
+        if (nodeTo == null) {
+            nodeTo = newNode(to);
+        }
+        Edge e = new Edge(nodeFrom, nodeTo);
+        edgeList.add(e);
+        return e;
+    }
 
-	public Subgraph newSubgraph(String subgraphId) {
-		return newSubgraph(subgraphId, RankType.same);
-	}
+    public Subgraph newSubgraph(String subgraphId, RankType rankType) {
+        Subgraph s = new Subgraph(subgraphId, rankType, this);
+        subgraphList.add(s);
+        return s;
+    }
 
-	public ClusterSubgraph newClusterSubgraph(String subgraphId) {
-		Matcher m = nonWordPattern.matcher(subgraphId);
-		if (m.find()) {
-			subgraphId = m.replaceAll("");
-			logger.warn("Subgraph label must not contain non word charactzers - all non word characters replaced.");
-		}
-		ClusterSubgraph s = new ClusterSubgraph(subgraphId, this);
-		subgraphList.add(s);
-		return s;
-	}
+    public Subgraph newSubgraph(String subgraphId) {
+        return newSubgraph(subgraphId, RankType.same);
+    }
 
-	public GraphProperties getGraphProperties() {
-		return graphProperties;
-	}
+    public ClusterSubgraph newClusterSubgraph(String subgraphId) {
+        Matcher m = NON_WORD_PATTERN.matcher(subgraphId);
+        if (m.find()) {
+            subgraphId = m.replaceAll("");
+            LOGGER.warn("Subgraph label must not contain non word charactzers - all non word characters replaced.");
+        }
+        ClusterSubgraph s = new ClusterSubgraph(subgraphId, this);
+        subgraphList.add(s);
+        return s;
+    }
+
+    public GraphProperties getGraphProperties() {
+        return graphProperties;
+    }
 }

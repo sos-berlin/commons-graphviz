@@ -60,7 +60,7 @@ public class EdgePropertiesTest {
 		p.setDir(DirType.forward);
 		p.setFontColor(SVGColor.darkgray);
 		p.setFontName("Arial");
-		p.setFontSize(12);
+        p.setFontSize(12);
 		p.setHeadClip(true);
 		p.setHeadLabel("head");
 		p.setHeadPort(PortPos.nw);

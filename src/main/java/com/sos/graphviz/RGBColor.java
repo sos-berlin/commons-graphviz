@@ -1,11 +1,9 @@
 package com.sos.graphviz;
 
-/**
- * Class to convert the hex representation of a color to the red, green and blue part and vice versa.
+/** Class to convert the hex representation of a color to the red, green and blue
+ * part and vice versa.
  *
- * @uthor Stefan Schaedlich
- * at 25.09.13 15:44
- */
+ * @uthor Stefan Schaedlich at 25.09.13 15:44 */
 public class RGBColor {
 
     private final Integer red;
