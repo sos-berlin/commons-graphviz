@@ -9,7 +9,7 @@ public class GraphvizEnumProperty extends GraphvizProperty implements IGraphvizP
 	@Override
 	public String getContent() {
 		Enum<?> e = (Enum<?>)getValue();
-		return (isSet()) ? getPropertyName() + " = \"" + e.name() + "\"" + nl : "";
+		return (isSet()) ? getPropertyName() + " = \"" + e.name() + "\"" + NL : "";
 	}
 	
 }

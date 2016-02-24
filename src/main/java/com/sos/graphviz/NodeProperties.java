@@ -8,158 +8,168 @@ import com.sos.graphviz.properties.GraphvizProperty;
 
 public abstract class NodeProperties extends GraphvizObject implements IGraphvizObject {
 
-	
-	private final GraphvizProperty fontcolor = new GraphvizEnumProperty("fontcolor");
-	public String getFontsize() {
-		return (String) fontsize.getValue();
-	}
-
-	public void setFontsize(final String pstrFontSize) {
-		this.fontsize.setValue(pstrFontSize);
-	}
-
-	private final GraphvizProperty fontsize = new GraphvizProperty("fontsize");
-	private final GraphvizProperty color = new GraphvizEnumProperty("color");
-	private final GraphvizProperty fillcolor = new GraphvizEnumProperty("fillcolor");
-	private final GraphvizProperty fixedSize = new GraphvizProperty("fixedsize");
-	private final GraphvizProperty group = new GraphvizProperty("group");
-	private final GraphvizProperty height = new GraphvizProperty("height");
-	private final GraphvizProperty id = new GraphvizProperty("id");
-	private final GraphvizProperty label = new GraphvizHtmlProperty("label");
-	private final GraphvizProperty pos = new GraphvizProperty("pos");
-	private final GraphvizProperty shape = new GraphvizEnumProperty("shape");
+    private static final String CONST_PROLOG = " [";
+    private static final String CONST_EPILOG = "]";
+    private final GraphvizProperty fontcolor = new GraphvizEnumProperty("fontcolor");
+    private final GraphvizProperty fontname = new GraphvizProperty("fontname");
+    private final GraphvizProperty fontsize = new GraphvizProperty("fontsize");
+    private final GraphvizProperty color = new GraphvizEnumProperty("color");
+    private final GraphvizProperty fillcolor = new GraphvizEnumProperty("fillcolor");
+    private final GraphvizProperty fixedSize = new GraphvizProperty("fixedsize");
+    private final GraphvizProperty group = new GraphvizProperty("group");
+    private final GraphvizProperty height = new GraphvizProperty("height");
+    private final GraphvizProperty id = new GraphvizProperty("id");
+    private final GraphvizProperty label = new GraphvizHtmlProperty("label");
+    private final GraphvizProperty pos = new GraphvizProperty("pos");
+    private final GraphvizProperty shape = new GraphvizEnumProperty("shape");
     private final GraphvizProperty style = new GraphvizProperty("style");
     private final GraphvizProperty tooltip = new GraphvizProperty("tooltip");
-	private final GraphvizProperty url = new GraphvizProperty("URL");
-	private final GraphvizProperty width = new GraphvizProperty("width");
-	
-	private static final String constProlog = " [";
-	private static final String constEpilog = "]";
-	
-	public NodeProperties(String prefix, Shape shape) {
-		super(prefix + " " + constProlog, constEpilog);
-		this.shape.setValue(shape);
-	}
-	
-	public NodeProperties(String prefix) {
-		super( (prefix + " ").trim() + constProlog, constEpilog);
-	}
-	
-	@Override public String getContent() {
-		StringBuilder sb = new StringBuilder();
-		sb.append( color.getContent() );
-		sb.append( fixedSize.getContent() );
-		sb.append( fillcolor.getContent() );
-		sb.append( fontcolor.getContent() );
-		sb.append( fontsize.getContent() );
-		sb.append( group.getContent() );
-		sb.append( height.getContent() );
-		sb.append( id.getContent() );
-		sb.append( label.getContent() );
-		sb.append( pos.getContent() );
-        sb.append( shape.getContent() );
-        sb.append( style.getContent() );
-        sb.append( tooltip.getContent() );
-		sb.append( url.getContent() );
-		sb.append( width.getContent() );
-		return sb.toString();
-	}
+    private final GraphvizProperty url = new GraphvizProperty("URL");
+    private final GraphvizProperty width = new GraphvizProperty("width");
 
-	@Override public GraphvizObject getProperties() {
-		return this;
-	}
+    public String getFontsize() {
+        return (String) fontsize.getValue();
+    }
 
-	public NodeProperties setShape(Shape shape) {
-		this.shape.setValue(shape);
-		return this;
-	}
+    public void setFontsize(final String pstrFontSize) {
+        this.fontsize.setValue(pstrFontSize);
+    }
 
-	public void setWidth(double width) {
-		this.width.setValue(width);
-	}
+    public NodeProperties(String prefix, Shape shape) {
+        super(prefix + " " + CONST_PROLOG, CONST_EPILOG);
+        this.shape.setValue(shape);
+    }
 
-	public void setLabel(String label) {
-		this.label.setValue(label);
-	}
+    public NodeProperties(String prefix) {
+        super((prefix + " ").trim() + CONST_PROLOG, CONST_EPILOG);
+    }
 
-	public Shape getShape() {
-		return (Shape)shape.getValue();
-	}
+    @Override
+    public String getContent() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(color.getContent());
+        sb.append(fixedSize.getContent());
+        sb.append(fillcolor.getContent());
+        sb.append(fontname.getContent());
+        sb.append(fontcolor.getContent());
+        sb.append(fontsize.getContent());
+        sb.append(group.getContent());
+        sb.append(height.getContent());
+        sb.append(id.getContent());
+        sb.append(label.getContent());
+        sb.append(pos.getContent());
+        sb.append(shape.getContent());
+        sb.append(style.getContent());
+        sb.append(tooltip.getContent());
+        sb.append(url.getContent());
+        sb.append(width.getContent());
+        return sb.toString();
+    }
 
-	public double getWidth() {
-		return (Double)width.getValue();
-	}
+    @Override
+    public GraphvizObject getProperties() {
+        return this;
+    }
 
-	public String getLabel() {
-		return (String)label.getValue();
-	}
+    public NodeProperties setShape(Shape shape) {
+        this.shape.setValue(shape);
+        return this;
+    }
 
-	public double getHeight() {
-		return (Double)height.getValue();
-	}
+    public String getFontname() {
+        return (String) fontname.getValue();
+    }
 
-	public void setHeight(double height) {
-		this.height.setValue(height);
-	}
+    public void setFontname(String fontname) {
+        this.fontname.setValue(fontname);
+    }
 
-	public boolean isFixedSize() {
-		return (Boolean)fixedSize.getValue();
-	}
+    public void setWidth(double width) {
+        this.width.setValue(width);
+    }
 
-	public void setFixedSize(boolean fixedSize) {
-		this.fixedSize.setValue(fixedSize);
-	}
+    public void setLabel(String label) {
+        this.label.setValue(label);
+    }
 
-	public String getUrl() {
-		return (String)url.getValue();
-	}
+    public Shape getShape() {
+        return (Shape) shape.getValue();
+    }
 
-	public void setUrl(String url) {
-		this.url.setValue(url);
-	}
+    public double getWidth() {
+        return (Double) width.getValue();
+    }
 
-	public SVGColor getColor() {
-		return (SVGColor)color.getValue();
-	}
+    public String getLabel() {
+        return (String) label.getValue();
+    }
 
-	public void setColor(SVGColor color) {
-		this.color.setValue(color);
-	}
+    public double getHeight() {
+        return (Double) height.getValue();
+    }
 
-	public SVGColor getFillcolor() {
-		return (SVGColor)fillcolor.getValue();
-	}
+    public void setHeight(double height) {
+        this.height.setValue(height);
+    }
 
-	public void setFillcolor(SVGColor fillcolor) {
-		this.fillcolor.setValue(fillcolor);
-	}
+    public boolean isFixedSize() {
+        return (Boolean) fixedSize.getValue();
+    }
 
-	public SVGColor getFontcolor() {
-		return (SVGColor)fontcolor.getValue();
-	}
+    public void setFixedSize(boolean fixedSize) {
+        this.fixedSize.setValue(fixedSize);
+    }
 
-	public void setFontcolor(SVGColor fontcolor) {
-		this.fontcolor.setValue(fontcolor);
-	}
+    public String getUrl() {
+        return (String) url.getValue();
+    }
 
-	public double getPos() {
-		return (Double)pos.getValue();
-	}
+    public void setUrl(String url) {
+        this.url.setValue(url);
+    }
 
-	public void setPos(double pos) {
-		this.pos.setValue(pos);
-	}
+    public SVGColor getColor() {
+        return (SVGColor) color.getValue();
+    }
 
-	public String getGroup() {
-		return (String)url.getValue();
-	}
+    public void setColor(SVGColor color) {
+        this.color.setValue(color);
+    }
 
-	public void setGroup(String group) {
-		this.group.setValue(group);
-	}
+    public SVGColor getFillcolor() {
+        return (SVGColor) fillcolor.getValue();
+    }
+
+    public void setFillcolor(SVGColor fillcolor) {
+        this.fillcolor.setValue(fillcolor);
+    }
+
+    public SVGColor getFontcolor() {
+        return (SVGColor) fontcolor.getValue();
+    }
+
+    public void setFontcolor(SVGColor fontcolor) {
+        this.fontcolor.setValue(fontcolor);
+    }
+
+    public double getPos() {
+        return (Double) pos.getValue();
+    }
+
+    public void setPos(double pos) {
+        this.pos.setValue(pos);
+    }
+
+    public String getGroup() {
+        return (String) url.getValue();
+    }
+
+    public void setGroup(String group) {
+        this.group.setValue(group);
+    }
 
     public String getStyle() {
-        return (String)style.getValue();
+        return (String) style.getValue();
     }
 
     public void setStyle(String style) {
@@ -167,7 +177,7 @@ public abstract class NodeProperties extends GraphvizObject implements IGraphviz
     }
 
     public String getTooltip() {
-        return (String)tooltip.getValue();
+        return (String) tooltip.getValue();
     }
 
     public void setTooltip(String tooltip) {
@@ -175,7 +185,7 @@ public abstract class NodeProperties extends GraphvizObject implements IGraphviz
     }
 
     public String getId() {
-        return (String)id.getValue();
+        return (String) id.getValue();
     }
 
     public void setId(String id) {

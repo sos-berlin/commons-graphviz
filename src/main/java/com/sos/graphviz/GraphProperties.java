@@ -1,4 +1,5 @@
 package com.sos.graphviz;
+
 import com.sos.graphviz.enums.Ordering;
 import com.sos.graphviz.enums.PackMode;
 import com.sos.graphviz.enums.RankDir;
@@ -8,191 +9,197 @@ import com.sos.graphviz.properties.GraphvizEnumProperty;
 import com.sos.graphviz.properties.GraphvizProperty;
 
 public class GraphProperties extends GraphvizObject implements IGraphvizObject {
-	private static final String		constProlog			= "graph [";
-	private static final String		constEpilog			= "]";
-	private static final RankDir	defaultDirection	= RankDir.LR;
-	private final GraphvizProperty	concentrate			= new GraphvizProperty("concentrate");
-	private final GraphvizProperty	compound			= new GraphvizProperty("compound");
-	private final GraphvizProperty	rankdir				= new GraphvizEnumProperty("rankdir");
-	private final GraphvizProperty	fontname			= new GraphvizProperty("fontname");
-	private final GraphvizProperty	fontsize			= new GraphvizProperty("fontsize");
-	private final GraphvizProperty	nodesep				= new GraphvizProperty("nodesep");
-	private final GraphvizProperty	normalize			= new GraphvizProperty("normalize");
-	private final GraphvizProperty	ordering			= new GraphvizEnumProperty("ordering");
-	private final GraphvizProperty	id					= new GraphvizProperty("id");
-	private final GraphvizProperty	label				= new GraphvizProperty("label");
 
-	public GraphvizProperty getFontsize() {
-		return (GraphvizProperty) fontsize.getValue();
-	}
-	public void setFontSize (final String pstrFontSize) {
-		fontsize.setValue(pstrFontSize);
-	}
-	public GraphvizProperty getLabel() {
-		return (GraphvizProperty) label.getValue();
-	}
-	public void setLabel (final String pstrLabel) {
-		label.setValue(pstrLabel);
-	}
-	private final GraphvizProperty	ranksep		= new GraphvizProperty("ranksep");
-	private final GraphvizProperty	sep			= new GraphvizProperty("sep");
-	private final GraphvizProperty	smoothing	= new GraphvizEnumProperty("smoothing");
-	private final GraphvizProperty	packmode	= new GraphvizEnumProperty("packmode");
-	private final GraphvizProperty	splines		= new GraphvizEnumProperty("splines");
-	private final GraphvizProperty	size		= new GraphvizProperty("size");
-	private final GraphvizProperty	ratio		= new GraphvizProperty("ratio");
+    private static final String CONST_PROLOG = "graph [";
+    private static final String CONST_EPILOG = "]";
+    private static final RankDir DEFAULT_DIRECTION = RankDir.LR;
+    private final GraphvizProperty concentrate = new GraphvizProperty("concentrate");
+    private final GraphvizProperty compound = new GraphvizProperty("compound");
+    private final GraphvizProperty rankdir = new GraphvizEnumProperty("rankdir");
+    private final GraphvizProperty fontname = new GraphvizProperty("fontname");
+    private final GraphvizProperty fontsize = new GraphvizProperty("fontsize");
+    private final GraphvizProperty nodesep = new GraphvizProperty("nodesep");
+    private final GraphvizProperty normalize = new GraphvizProperty("normalize");
+    private final GraphvizProperty ordering = new GraphvizEnumProperty("ordering");
+    private final GraphvizProperty id = new GraphvizProperty("id");
+    private final GraphvizProperty label = new GraphvizProperty("label");
+    private final GraphvizProperty ranksep = new GraphvizProperty("ranksep");
+    private final GraphvizProperty sep = new GraphvizProperty("sep");
+    private final GraphvizProperty smoothing = new GraphvizEnumProperty("smoothing");
+    private final GraphvizProperty packmode = new GraphvizEnumProperty("packmode");
+    private final GraphvizProperty splines = new GraphvizEnumProperty("splines");
+    private final GraphvizProperty size = new GraphvizProperty("size");
+    private final GraphvizProperty ratio = new GraphvizProperty("ratio");
 
-	public GraphProperties(RankDir direction) {
-		super(constProlog, constEpilog);
-		setDirection(direction);
-	}
+    public GraphvizProperty getFontsize() {
+        return (GraphvizProperty) fontsize.getValue();
+    }
 
-	public GraphProperties() {
-		super(constProlog, constEpilog);
-		setDirection(defaultDirection);
-	}
+    public void setFontSize(final String pstrFontSize) {
+        fontsize.setValue(pstrFontSize);
+    }
 
-	@Override public String getContent() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(concentrate.getContent());
-		sb.append(compound.getContent());
-		sb.append(fontname.getContent());
-		sb.append(fontsize.getContent());
-		sb.append(nodesep.getContent());
-		sb.append(normalize.getContent());
-		sb.append(id.getContent());
-		sb.append(packmode.getContent());
-		sb.append(rankdir.getContent());
-		sb.append(ranksep.getContent());
-		sb.append(sep.getContent());
-		sb.append(splines.getContent());
-		sb.append(size.getContent());
-		sb.append(ratio.getContent());
-		sb.append(label.getContent());
-		return sb.toString();
-	}
+    public GraphvizProperty getLabel() {
+        return (GraphvizProperty) label.getValue();
+    }
 
-	@Override public GraphvizObject getProperties() {
-		return this;
-	}
+    public void setLabel(final String pstrLabel) {
+        label.setValue(pstrLabel);
+    }
 
-	public RankDir getDirection() {
-		return (RankDir) rankdir.getValue();
-	}
+    public GraphProperties(RankDir direction) {
+        super(CONST_PROLOG, CONST_EPILOG);
+        setDirection(direction);
+    }
 
-	public void setDirection(RankDir direction) {
-		this.rankdir.setValue(direction);
-	}
+    public GraphProperties() {
+        super(CONST_PROLOG, CONST_EPILOG);
+        setDirection(DEFAULT_DIRECTION);
+    }
 
-	public boolean isConcentrate() {
-		return (Boolean) concentrate.getValue();
-	}
+    @Override
+    public String getContent() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(concentrate.getContent());
+        sb.append(compound.getContent());
+        sb.append(fontname.getContent());
+        sb.append(fontsize.getContent());
+        sb.append(nodesep.getContent());
+        sb.append(normalize.getContent());
+        sb.append(id.getContent());
+        sb.append(packmode.getContent());
+        sb.append(rankdir.getContent());
+        sb.append(ranksep.getContent());
+        sb.append(sep.getContent());
+        sb.append(splines.getContent());
+        sb.append(size.getContent());
+        sb.append(ratio.getContent());
+        sb.append(label.getContent());
+        return sb.toString();
+    }
 
-	public void setConcentrate(boolean concentrate) {
-		this.concentrate.setValue(concentrate);
-	}
+    @Override
+    public GraphvizObject getProperties() {
+        return this;
+    }
 
-	public Splines getSplines() {
-		return (Splines) splines.getValue();
-	}
+    public RankDir getDirection() {
+        return (RankDir) rankdir.getValue();
+    }
 
-	public void setSplines(Splines splines) {
-		this.splines.setValue(splines);
-	}
+    public void setDirection(RankDir direction) {
+        this.rankdir.setValue(direction);
+    }
 
-	public double getNodesep() {
-		return (Double) nodesep.getValue();
-	}
+    public boolean isConcentrate() {
+        return (Boolean) concentrate.getValue();
+    }
 
-	public void setNodesep(double nodesep) {
-		this.nodesep.setValue(nodesep);
-	}
+    public void setConcentrate(boolean concentrate) {
+        this.concentrate.setValue(concentrate);
+    }
 
-	public boolean isNormalize() {
-		return (Boolean) normalize.getValue();
-	}
+    public Splines getSplines() {
+        return (Splines) splines.getValue();
+    }
 
-	public void setNormalize(boolean normalize) {
-		this.normalize.setValue(normalize);
-	}
+    public void setSplines(Splines splines) {
+        this.splines.setValue(splines);
+    }
 
-	public double getSep() {
-		return (Double) sep.getValue();
-	}
+    public double getNodesep() {
+        return (Double) nodesep.getValue();
+    }
 
-	public void setSep(double sep) {
-		this.sep.setValue(sep);
-	}
+    public void setNodesep(double nodesep) {
+        this.nodesep.setValue(nodesep);
+    }
 
-	public String getFontname() {
-		return (String) fontname.getValue();
-	}
+    public boolean isNormalize() {
+        return (Boolean) normalize.getValue();
+    }
 
-	public void setFontname(String fontname) {
-		this.fontname.setValue(fontname);
-	}
+    public void setNormalize(boolean normalize) {
+        this.normalize.setValue(normalize);
+    }
 
-	public boolean getCompound() {
-		return (Boolean) compound.getValue();
-	}
+    public double getSep() {
+        return (Double) sep.getValue();
+    }
 
-	public void setCompound(boolean compound) {
-		this.compound.setValue(compound);
-	}
+    public void setSep(double sep) {
+        this.sep.setValue(sep);
+    }
 
-	public PackMode getPackmode() {
-		return (PackMode) packmode.getValue();
-	}
+    public String getFontname() {
+        return (String) fontname.getValue();
+    }
 
-	public void setPackmode(PackMode packmode) {
-		this.packmode.setValue(packmode);
-	}
+    public void setFontname(String fontname) {
+        this.fontname.setValue(fontname);
+    }
 
-	public Ordering getOrdering() {
-		return (Ordering) ordering.getValue();
-	}
+    public boolean getCompound() {
+        return (Boolean) compound.getValue();
+    }
 
-	public void setOrdering(Ordering ordering) {
-		this.ordering.setValue(ordering);
-	}
+    public void setCompound(boolean compound) {
+        this.compound.setValue(compound);
+    }
 
-	public String getRanksep() {
-		return (String) ranksep.getValue();
-	}
+    public PackMode getPackmode() {
+        return (PackMode) packmode.getValue();
+    }
 
-	public void setRanksep(String ranksep) {
-		this.ranksep.setValue(ranksep);
-	}
+    public void setPackmode(PackMode packmode) {
+        this.packmode.setValue(packmode);
+    }
 
-	public SmoothType getSmoothing() {
-		return (SmoothType) smoothing.getValue();
-	}
+    public Ordering getOrdering() {
+        return (Ordering) ordering.getValue();
+    }
 
-	public void setSmoothing(SmoothType smoothing) {
-		this.smoothing.setValue(smoothing);
-	}
+    public void setOrdering(Ordering ordering) {
+        this.ordering.setValue(ordering);
+    }
 
-	public String getId() {
-		return (String) id.getValue();
-	}
+    public String getRanksep() {
+        return (String) ranksep.getValue();
+    }
 
-	public void setId(String id) {
-		this.id.setValue(id);
-	}
+    public void setRanksep(String ranksep) {
+        this.ranksep.setValue(ranksep);
+    }
 
-	public String getSize() {
-		return (String) size.getValue();
-	}
+    public SmoothType getSmoothing() {
+        return (SmoothType) smoothing.getValue();
+    }
 
-	public void setSize(String size) {
-		this.size.setValue(size);
-	}
+    public void setSmoothing(SmoothType smoothing) {
+        this.smoothing.setValue(smoothing);
+    }
 
-	public String getRatio() {
-		return (String) ratio.getValue();
-	}
+    public String getId() {
+        return (String) id.getValue();
+    }
 
-	public void setRatio(String ratio) {
-		this.ratio.setValue(ratio);
-	}
+    public void setId(String id) {
+        this.id.setValue(id);
+    }
+
+    public String getSize() {
+        return (String) size.getValue();
+    }
+
+    public void setSize(String size) {
+        this.size.setValue(size);
+    }
+
+    public String getRatio() {
+        return (String) ratio.getValue();
+    }
+
+    public void setRatio(String ratio) {
+        this.ratio.setValue(ratio);
+    }
 }
