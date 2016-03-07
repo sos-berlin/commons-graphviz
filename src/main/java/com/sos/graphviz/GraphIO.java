@@ -31,7 +31,7 @@ public class GraphIO {
     }
 
     public void setDotExecFileName(final String pstrDotExecFileName) {
-        if (new File(pstrDotExecFileName).exists() == false) {
+        if (!(new File(pstrDotExecFileName).exists())) {
             throw new JobSchedulerException(String.format("Dot-executable '%1$s' not found", pstrDotExecFileName));
         }
         DOT = pstrDotExecFileName;
