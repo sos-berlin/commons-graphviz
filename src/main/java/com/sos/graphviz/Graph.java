@@ -21,35 +21,27 @@ import java.util.regex.Pattern;
  * See class com.sos.graphviz.GraphTest how to create a graph. */
 public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(Graph.class);
-    private static final String CONST_GRAPH = "G";
-    private static final String CONST_PLACEHOLDER = "%id%";
-    private static final String CONST_PROLOG = "digraph " + CONST_PLACEHOLDER + " {";
-    private static final String CONST_PROLOG_SUBGRAPH = "subgraph " + CONST_PLACEHOLDER + " {";
-    private static final String CONST_EPILOG = "}";
-    private final static Pattern NON_WORD_PATTERN = Pattern.compile("\\s|\\W");
+    private static final Logger LOGGER = LoggerFactory.getLogger(Graph.class);
+    private static final String GRAPH = "G";
+    private static final String PLACEHOLDER = "%id%";
+    private static final String PROLOG = "digraph " + PLACEHOLDER + " {";
+    private static final String PROLOG_SUBGRAPH = "subgraph " + PLACEHOLDER + " {";
+    private static final String EPILOG = "}";
+    private static final Pattern NON_WORD_PATTERN = Pattern.compile("\\s|\\W");
     private final GraphvizProperty fontsize = new GraphvizEnumProperty("fontsize");
     private final GraphProperties graphProperties = new GraphProperties();
-    private GlobalNodeProperties globalNodeProperties = new GlobalNodeProperties(Shape.box);
     private final List<Node> nodeList = new ArrayList<Node>();
     private final List<Edge> edgeList = new ArrayList<Edge>();
     private final List<Subgraph> subgraphList = new ArrayList<Subgraph>();
+    private GlobalNodeProperties globalNodeProperties = new GlobalNodeProperties(Shape.box);
 
-    public String getFontsize() {
-        return (String) fontsize.getValue();
-    }
-
-    public void setFontsize(final String pstrFontSize) {
-        this.fontsize.setValue(pstrFontSize);
-    }
-
-    public Graph() {
-        super(CONST_GRAPH, CONST_PROLOG.replace(CONST_PLACEHOLDER, CONST_GRAPH), CONST_EPILOG);
+    protected Graph(String subGraphId) {
+        super(subGraphId, PROLOG_SUBGRAPH.replace(PLACEHOLDER, subGraphId), EPILOG);
         init();
     }
 
-    protected Graph(String subGraphId) {
-        super(subGraphId, CONST_PROLOG_SUBGRAPH.replace(CONST_PLACEHOLDER, subGraphId), CONST_EPILOG);
+    public Graph() {
+        super(GRAPH, PROLOG.replace(PLACEHOLDER, GRAPH), EPILOG);
         init();
     }
 
@@ -77,13 +69,13 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
     }
 
     public Node getNodeOrNull(String id) {
-        id = getQuoted(id);
+        String quotedId = getQuoted(id);
         if (nodeList.isEmpty()) {
             LOGGER.debug("The graph {} contains no nodes.", this.getId());
         }
         Node result = null;
         for (Node n : nodeList) {
-            if (n.getId().equals(id)) {
+            if (n.getId().equals(quotedId)) {
                 result = n;
                 break;
             }
@@ -140,8 +132,8 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
     }
 
     public Node newNode(String node) {
-        node = getQuoted(node);
-        Node n = new Node(node);
+        String quotedNode = getQuoted(node);
+        Node n = new Node(quotedNode);
         nodeList.add(n);
         return n;
     }
@@ -178,11 +170,12 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 
     public ClusterSubgraph newClusterSubgraph(String subgraphId) {
         Matcher m = NON_WORD_PATTERN.matcher(subgraphId);
+        String replacedSubgraphId = subgraphId;
         if (m.find()) {
-            subgraphId = m.replaceAll("");
-            LOGGER.warn("Subgraph label must not contain non word charactzers - all non word characters replaced.");
+            replacedSubgraphId = m.replaceAll("");
+            LOGGER.warn("Subgraph label must not contain non word characters - all non word characters replaced.");
         }
-        ClusterSubgraph s = new ClusterSubgraph(subgraphId, this);
+        ClusterSubgraph s = new ClusterSubgraph(replacedSubgraphId, this);
         subgraphList.add(s);
         return s;
     }
@@ -190,4 +183,13 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
     public GraphProperties getGraphProperties() {
         return graphProperties;
     }
+
+    public String getFontsize() {
+        return (String) fontsize.getValue();
+    }
+
+    public void setFontsize(final String pstrFontSize) {
+        this.fontsize.setValue(pstrFontSize);
+    }
+
 }

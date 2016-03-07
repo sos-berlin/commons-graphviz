@@ -6,92 +6,91 @@ import com.sos.graphviz.properties.GraphvizProperty;
 
 public class SubgraphProperties extends GraphvizObject implements IGraphvizObject {
 
-    private static final String constProlog = "";
-	private static final String constEpilog = "";
-
+    private static final String PROLOG = "";
+    private static final String EPILOG = "";
     private GraphvizProperty fontColor = new GraphvizEnumProperty("fontcolor");
     private GraphvizProperty fontName = new GraphvizProperty("fontname");
     private GraphvizProperty fontSize = new GraphvizProperty("fontsize");
     private GraphvizProperty id = new GraphvizProperty("id");
-	private GraphvizProperty rank = new GraphvizEnumProperty("rank");
-	private GraphvizProperty style = new GraphvizEnumProperty("style");
+    private GraphvizProperty rank = new GraphvizEnumProperty("rank");
+    private GraphvizProperty style = new GraphvizEnumProperty("style");
     private GraphvizProperty label = new GraphvizProperty("label");
     private GraphvizProperty labeljust = new GraphvizEnumProperty("labeljust");
     private GraphvizProperty ordering = new GraphvizEnumProperty("ordering");
-	private GraphvizProperty bgcolor = new GraphvizEnumProperty("bgcolor");
-	private GraphvizProperty color = new GraphvizEnumProperty("color");
+    private GraphvizProperty bgcolor = new GraphvizEnumProperty("bgcolor");
+    private GraphvizProperty color = new GraphvizEnumProperty("color");
 
-	public SubgraphProperties(RankType rankType) {
-		super(constProlog, constEpilog);
-		this.rank.setValue(rankType);
-	}
+    public SubgraphProperties() {
+        super(PROLOG, EPILOG);
+    }
 
-	public SubgraphProperties() {
-		super(constProlog, constEpilog);
-	}
+    public SubgraphProperties(RankType rankType) {
+        super(PROLOG, EPILOG);
+        this.rank.setValue(rankType);
+    }
 
     @Override
-	public String getContent() {
-		StringBuilder sb = new StringBuilder();
-        sb.append( bgcolor.getContent() );
-        sb.append( color.getContent() );
-        sb.append( fontColor.getContent() );
-        sb.append( fontName.getContent() );
-        sb.append( fontSize.getContent() );
-        sb.append( id.getContent() );
-		sb.append( label.getContent() );
-		sb.append( labeljust.getContent() );
+    public String getContent() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(bgcolor.getContent());
+        sb.append(color.getContent());
+        sb.append(fontColor.getContent());
+        sb.append(fontName.getContent());
+        sb.append(fontSize.getContent());
+        sb.append(id.getContent());
+        sb.append(label.getContent());
+        sb.append(labeljust.getContent());
         sb.append(rank.getContent());
-        sb.append( style.getContent() );
-		return sb.toString();
-	}
+        sb.append(style.getContent());
+        return sb.toString();
+    }
 
-	public Style getStyle() {
-		return (Style)style.getValue();
-	}
+    public Style getStyle() {
+        return (Style) style.getValue();
+    }
 
-	public void setStyle(Style style) {
-		this.style.setValue(style);
-	}
+    public void setStyle(Style style) {
+        this.style.setValue(style);
+    }
 
-	public GraphvizObject getProperties() {
-		return this;
-	}
+    public GraphvizObject getProperties() {
+        return this;
+    }
 
-	public String getLabel() {
-		return (String)label.getValue();
-	}
+    public String getLabel() {
+        return (String) label.getValue();
+    }
 
-	public void setLabel(String label) {
-		this.label.setValue(label);
-	}
+    public void setLabel(String label) {
+        this.label.setValue(label);
+    }
 
-	public SVGColor getBgcolor() {
-		return (SVGColor)bgcolor.getValue();
-	}
+    public SVGColor getBgcolor() {
+        return (SVGColor) bgcolor.getValue();
+    }
 
-	public void setBgcolor(SVGColor bgcolor) {
-		this.bgcolor.setValue(bgcolor);
-	}
+    public void setBgcolor(SVGColor bgcolor) {
+        this.bgcolor.setValue(bgcolor);
+    }
 
-	public SVGColor getColor() {
-		return (SVGColor)color.getValue();
-	}
+    public SVGColor getColor() {
+        return (SVGColor) color.getValue();
+    }
 
-	public void setColor(SVGColor color) {
-		this.color.setValue(color);
-	}
+    public void setColor(SVGColor color) {
+        this.color.setValue(color);
+    }
 
-	public void setRank(RankType rankType) {
-		this.rank.setValue(rankType);
-	}
+    public void setRank(RankType rankType) {
+        this.rank.setValue(rankType);
+    }
 
-	public RankType getRank() {
-		return (RankType)this.rank.getValue();
-	}
+    public RankType getRank() {
+        return (RankType) this.rank.getValue();
+    }
 
     public Justify getLabeljust() {
-        return (Justify)labeljust.getValue();
+        return (Justify) labeljust.getValue();
     }
 
     public void setLabeljust(Justify labeljust) {
@@ -99,7 +98,7 @@ public class SubgraphProperties extends GraphvizObject implements IGraphvizObjec
     }
 
     public Ordering getOrdering() {
-        return (Ordering)ordering.getValue();
+        return (Ordering) ordering.getValue();
     }
 
     public void setOrdering(Ordering ordering) {
@@ -107,15 +106,15 @@ public class SubgraphProperties extends GraphvizObject implements IGraphvizObjec
     }
 
     public SVGColor getFontColor() {
-        return (SVGColor)fontColor.getValue();
+        return (SVGColor) fontColor.getValue();
     }
 
     public String getFontName() {
-        return (String)fontName.getValue();
+        return (String) fontName.getValue();
     }
 
     public double getFontSize() {
-        return (Double)fontSize.getValue();
+        return (Double) fontSize.getValue();
     }
 
     public void setFontColor(SVGColor fontColor) {
@@ -131,7 +130,7 @@ public class SubgraphProperties extends GraphvizObject implements IGraphvizObjec
     }
 
     public String getId() {
-        return (String)id.getValue();
+        return (String) id.getValue();
     }
 
     public void setId(String id) {

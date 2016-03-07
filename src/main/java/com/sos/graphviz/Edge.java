@@ -5,7 +5,7 @@ public class Edge extends GraphvizObject implements IGraphvizObject {
 
     private final Node fromNode;
     private final Node toNode;
-    private EdgeProperties edgeProperties = new EdgeProperties();;
+    private EdgeProperties edgeProperties = new EdgeProperties();
 
     protected Edge(Node from, Node to) {
         super("", "");

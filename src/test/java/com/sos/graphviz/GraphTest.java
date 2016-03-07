@@ -17,14 +17,15 @@ import com.sos.graphviz.enums.SVGColor;
 import com.sos.graphviz.enums.Shape;
 import com.sos.graphviz.enums.Style;
 
-/** Class to demonstrate the usage of class Graph and its subsequent objects
- * (subgraphs, nodes, edges). */
 @Ignore("Test set to Ignore for later examination")
 public class GraphTest {
 
-    private final static String TARGET_DIRNAME = Resources.getResource("").getPath() + "/generated-svg/";
-    private final static File TARGET_DIR = new File(TARGET_DIRNAME);
+    private static final String TARGET_DIRNAME = Resources.getResource("").getPath() + "/generated-svg/";
+    private static final File TARGET_DIR = new File(TARGET_DIRNAME);
     private static final Logger LOGGER = Logger.getLogger(GraphTest.class);
+    private static final double DEFAULT_DIMENSION = 0.2;
+    private static final double DEFAULT_HEIGHT = 0.4;  
+    private static final double DEFAULT_WIDTH = 0.75;  
 
     @BeforeClass
     public static void setupBeforeClass() {
@@ -40,16 +41,16 @@ public class GraphTest {
         g.getGraphProperties().setRatio("auto");
         GlobalNodeProperties gn = g.getGlobalNodeProperties();
         gn.setFixedSize(true);
-        gn.setHeight(0.4);
-        gn.setWidth(0.75);
+        gn.setHeight(DEFAULT_HEIGHT);
+        gn.setWidth(DEFAULT_WIDTH);
         Node n1 = g.newNode("START");
         n1.getSingleNodeProperties().setShape(Shape.diamond);
         Node n2 = g.newNode("B1");
         SingleNodeProperties p = n2.getSingleNodeProperties();
         p.setShape(Shape.circle);
         p.setLabel("");
-        p.setHeight(0.2);
-        p.setWidth(0.2);
+        p.setHeight(DEFAULT_DIMENSION);
+        p.setWidth(DEFAULT_DIMENSION);
         p.setUrl("http://www.sos-berlin.com");
         Node n3 = g.newNode("C");
         ClusterSubgraph c = createCluster(g, "dummy1", "C");
