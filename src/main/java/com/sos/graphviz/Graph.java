@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Graph.class);
-    private static final String GRAPH = "G";
+    private static final String SHORTCUT_GRAPH = "G";
     private static final String PLACEHOLDER = "%id%";
     private static final String PROLOG = "digraph " + PLACEHOLDER + " {";
     private static final String PROLOG_SUBGRAPH = "subgraph " + PLACEHOLDER + " {";
@@ -41,7 +41,7 @@ public class Graph extends GraphvizObjectWithId implements IGraphvizObject {
     }
 
     public Graph() {
-        super(GRAPH, PROLOG.replace(PLACEHOLDER, GRAPH), EPILOG);
+        super(SHORTCUT_GRAPH, PROLOG.replace(PLACEHOLDER, SHORTCUT_GRAPH), EPILOG);
         init();
     }
 
