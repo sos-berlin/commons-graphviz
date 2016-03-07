@@ -1,16 +1,7 @@
 package com.sos.graphviz.enums;
 
 public enum FileType {
-    gif,
-    dot,
-    fig,
-    pdf,
-    ps,
-    svg,
-    png,
-    plain,
-    cmapx,
-    cmap;
+    gif, dot, fig, pdf, ps, svg, png, plain, cmapx, cmap;
 
     public static FileType fromText(String fileType) throws Exception {
         String searchFor = fileType.toLowerCase();

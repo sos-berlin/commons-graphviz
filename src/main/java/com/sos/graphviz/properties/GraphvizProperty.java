@@ -3,9 +3,8 @@ package com.sos.graphviz.properties;
 public class GraphvizProperty implements IGraphvizProperty {
 
     public static final String NL = "\n";
-
     private Object value;
-    private boolean isSet = false;
+    private boolean set = false;
     private final String propertyName;
 
     public GraphvizProperty(String propertyName) {
@@ -22,12 +21,12 @@ public class GraphvizProperty implements IGraphvizProperty {
     }
 
     public void setValue(Object value) {
-        this.isSet = true;
+        this.set = true;
         this.value = value;
     }
 
     public boolean isSet() {
-        return this.isSet;
+        return this.set;
     }
 
     public String getPropertyName() {
