@@ -11,14 +11,14 @@ import static org.junit.Assert.assertEquals;
 public class EdgePropertiesTest {
 
     private static final int MIN_SIZE = 2;
-    private static final int FONT_SIZE = 12; 
+    private static final int FONT_SIZE = 12;
     private String expectedDefault = "";
     private String expectedChanged = "[\n" + "arrowsize = \"2.0\"\n" + "arrowhead = \"crow\"\n" + "arrowtail = \"dot\"\n" + "color = \"bisque\"\n"
             + "comment = \"comment\"\n" + "constraint = \"true\"\n" + "decorate = \"true\"\n" + "dir = \"forward\"\n" + "fontcolor = \"darkgray\"\n"
             + "fontname = \"Arial\"\n" + "fontsize = \"12.0\"\n" + "headclip = \"true\"\n" + "headlabel = \"head\"\n" + "headport = \"nw\"\n"
             + "headURL = \"http://myurl.com\"\n" + "id = \"id\"\n" + "label = \"test\"\n" + "lhead = \"node1\"\n" + "ltail = \"node2\"\n"
-            + "samehead = \"samehead\"\n" + "sametail = \"sametail\"\n" + "taillabel = \"tail\"\n" + "tailport = \"e\"\n"
-            + "URL = \"http://myurl.com\"\n" + "weight = \"2.0\"\n" + "]\n";
+            + "samehead = \"samehead\"\n" + "sametail = \"sametail\"\n" + "taillabel = \"tail\"\n" + "tailport = \"e\"\n" + "URL = \"http://myurl.com\"\n"
+            + "weight = \"2.0\"\n" + "]\n";
 
     @Test
     public void testDefault() {
