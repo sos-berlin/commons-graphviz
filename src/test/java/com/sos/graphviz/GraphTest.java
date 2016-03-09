@@ -24,8 +24,8 @@ public class GraphTest {
     private static final File TARGET_DIR = new File(TARGET_DIRNAME);
     private static final Logger LOGGER = Logger.getLogger(GraphTest.class);
     private static final double DEFAULT_DIMENSION = 0.2;
-    private static final double DEFAULT_HEIGHT = 0.4;  
-    private static final double DEFAULT_WIDTH = 0.75;  
+    private static final double DEFAULT_HEIGHT = 0.4;
+    private static final double DEFAULT_WIDTH = 0.75;
 
     @BeforeClass
     public static void setupBeforeClass() {

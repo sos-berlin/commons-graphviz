@@ -9,9 +9,9 @@ import static org.junit.Assert.assertEquals;
 public class NodePropertiesTest {
 
     String expectedDefault = "";
-    String expectedChanged = "node [\ncolor = \"azure\"\nfixedsize = \"true\"\nfillcolor = \"blanchedalmond\"\n" +
-            "group = \"myGroup\"\nheight = \"1.0\"\nid = \"id\"\nlabel = <test>\npos = \"100.0\"\n" +
-            "shape = \"ellipse\"\nURL = \"http://myUrl.com\"\nwidth = \"1.0\"\n]\n";
+    String expectedChanged = "node [\ncolor = \"azure\"\nfixedsize = \"true\"\nfillcolor = \"blanchedalmond\"\n"
+            + "group = \"myGroup\"\nheight = \"1.0\"\nid = \"id\"\nlabel = <test>\npos = \"100.0\"\n"
+            + "shape = \"ellipse\"\nURL = \"http://myUrl.com\"\nwidth = \"1.0\"\n]\n";
 
     @Test
     public void testDefault() {
