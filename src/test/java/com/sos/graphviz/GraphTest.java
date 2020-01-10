@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
@@ -22,7 +23,7 @@ public class GraphTest {
 
     private static final String TARGET_DIRNAME = Resources.getResource("").getPath() + "/generated-svg/";
     private static final File TARGET_DIR = new File(TARGET_DIRNAME);
-    private static final Logger LOGGER = Logger.getLogger(GraphTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GraphTest.class);
     private static final double DEFAULT_DIMENSION = 0.2;
     private static final double DEFAULT_HEIGHT = 0.4;
     private static final double DEFAULT_WIDTH = 0.75;
@@ -89,7 +90,7 @@ public class GraphTest {
         File tempDir = Files.createTempDir();
         GraphIO io = new GraphIO(g);
         io.setDotDir(tempDir.getAbsolutePath());
-        LOGGER.info(TARGET_DIR);
+        LOGGER.info(TARGET_DIR.toString());
         io.writeGraphToFile(FileType.svg, new File(TARGET_DIR, "test.svg").getAbsolutePath());
     }
 
